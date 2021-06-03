@@ -31,6 +31,9 @@ router.get("/session", (req, res) => {
         return res.status(404).json({ errorMessage: "Session does not exist" });
       }
       return res.status(200).json(session);
+    })
+    .finally(() => {
+      return res.status(404).json({ errorMessage: "Session does not exist" });
     });
 });
 
@@ -92,6 +95,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
           return res.status(400).json({ errorMessage: error.message });
         }
         if (error.code === 11000) {
+          console.log(error.message);
           return res.status(400).json({
             errorMessage:
               "Username need to be unique. The username you chose is already in use.",

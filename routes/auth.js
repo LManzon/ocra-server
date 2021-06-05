@@ -32,9 +32,6 @@ router.get("/session", (req, res) => {
       }
       return res.status(200).json(session);
     })
-    .finally(() => {
-      return res.status(404).json({ errorMessage: "Session does not exist" });
-    });
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {

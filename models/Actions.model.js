@@ -8,7 +8,7 @@ const actionSchema = new Schema({
   },
   user: { type: Schema.Types.ObjectId, ref: "User" },
 
-  objectives: { type: Schema.Types.ObjectId, ref: "Objective" },
+  objective: { type: Schema.Types.ObjectId, ref: "Objective" },
 
   status: {
     type: String,

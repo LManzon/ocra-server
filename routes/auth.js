@@ -38,9 +38,9 @@ router.get("/session", (req, res) => {
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+  const { name, surname, email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
       .json({ errorMessage: "Please provide your username." });
@@ -65,7 +65,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
   */
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
+  User.findOne({ email }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
       return res.status(400).json({ errorMessage: "Username already taken." });
@@ -78,7 +78,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
       .then((hashedPassword) => {
         // Create a user and save it in the database
         return User.create({
-          username,
+          name,
+          surname,
+          email,
           password: hashedPassword,
         });
       })
@@ -107,9 +109,9 @@ router.post("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
       .json({ errorMessage: "Please provide your username." });
@@ -124,7 +126,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {

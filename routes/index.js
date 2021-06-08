@@ -4,7 +4,7 @@ const profileRouter = require("./profile");
 const Objectives = require("./Objectives");
 
 router.get("/", (req, res, next) => {
-  res.json("All good in here");
+    res.json("All good in here");
 });
 
 router.use("/auth", authRoutes);

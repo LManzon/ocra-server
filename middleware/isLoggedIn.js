@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   Session.findById(req.headers.authorization)
     .populate({ path: "user", model: "User" })
     .then((session) => {
-      if (!session)git  {
+      if (!session) {
         return res
           .status(404)
           .json({ errorMessage: "No session started for this user" });

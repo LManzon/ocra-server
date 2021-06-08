@@ -1,10 +1,15 @@
 const { Router } = require("express")
 const isLoggedIn = require("../middleware/isLoggedIn")
 const Objective = require("../models/Objectives.model")
-
-
 const router = Router();
 
+
+router.get("/", (req, res) => {
+  Objective.find({}).then((allObjectives) => {
+    res.json(allObjectives);
+    console.log(allObjectives)
+  });
+});
 
 router.post("/add", isLoggedIn, (req, res) => {
 

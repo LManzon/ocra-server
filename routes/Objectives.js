@@ -1,32 +1,46 @@
-const { Router } = require("express")
-const isLoggedIn = require("../middleware/isLoggedIn")
-const Objective = require("../models/Objectives.model")
+const { Router } = require("express");
+const isLoggedIn = require("../middleware/isLoggedIn");
+const Objective = require("../models/Objectives.model");
 const router = Router();
 
-
 router.post("/edit", isLoggedIn, (req, res) => {
-  const { problem, objectiveInput, keyResult, objectiveEndDate, action, category, visibility, sharedWithUser } = req.body;
+  const {
+    problem,
+    objectiveInput,
+    keyResult,
+    objectiveEndDate,
+    action,
+    category,
+    visibility,
+    sharedWithUser,
+  } = req.body;
 
   Objective.findByIdAndUpdate(
     req.objectives._id,
-    { problem, objectiveInput, keyResult, objectiveEndDate, action, category, visibility, sharedWithUser },
+    {
+      problem,
+      objectiveInput,
+      keyResult,
+      objectiveEndDate,
+      action,
+      category,
+      visibility,
+      sharedWithUser,
+    },
     { new: true }
   ).then((updateObjective) => {
     res.json({ objective: updateObjective });
   });
-
 });
-
 
 router.get("/", (req, res) => {
   Objective.find({}).then((allObjectives) => {
     res.json(allObjectives);
-    console.log(allObjectives)
+    console.log(allObjectives);
   });
 });
 
 router.post("/add", isLoggedIn, (req, res) => {
-
   Objective.findOne({
     problem: req.body.problem,
   })
@@ -34,14 +48,26 @@ router.post("/add", isLoggedIn, (req, res) => {
       if (oneProblem) {
         return res
           .status(400)
-          .json({ errorMessage: "This problem already exists. Create a slightly different one", key: "problem" });
+          .json({
+            errorMessage:
+              "This problem already exists. Create a slightly different one",
+            key: "problem",
+          });
       }
 
-      const { action, problem, objectiveInput, keyResult, objectiveEndDate, category, visibility, sharedWithUser } =
-        req.body;
-      console.log('visibility:', visibility)
+      const {
+        action,
+        problem,
+        objectiveInput,
+        keyResult,
+        objectiveEndDate,
+        category,
+        visibility,
+        sharedWithUser,
+      } = req.body;
+      console.log("visibility:", visibility);
       // console.log('action:', action)
-      console.log('category:', category)
+      console.log("category:", category);
 
       Objective.create({
         problem,
@@ -51,14 +77,12 @@ router.post("/add", isLoggedIn, (req, res) => {
         category,
         visibility,
         sharedWithUser,
-
-
       })
         .then((createdObjective) => {
           // Action.create({
           //   action
           // })
-          console.log('createdObjective:', createdObjective)
+          console.log("createdObjective:", createdObjective);
           res.json({ Objective: "Objective created" });
         })
         .catch((err) => {
@@ -82,8 +106,6 @@ router.put("/edit", (req, res) => {
     { new: true }
 
   )*/
-})
-
-
+});
 
 module.exports = router;

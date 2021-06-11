@@ -19,20 +19,19 @@ const objectivesSchema = new Schema({
 
   objectiveEndDate: {
     type: Date,
-    required: true,
+    // required: true,
   },
 
   keyResult: {
     type: String,
-    required: true,
+    // required: true,
   },
-
 
   user: { type: Schema.Types.ObjectId, ref: "User" },
 
   buddy: {
     type: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    required: true,
+    // required: true,
   },
 
   status: {

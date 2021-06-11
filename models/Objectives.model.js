@@ -8,6 +8,7 @@ const objectivesSchema = new Schema({
   category: {
     type: String,
     enum: ["Career", "Passion", "Relationship", "Financial", "Wellbeing"],
+    default: "Passion",
     required: true,
   },
 
@@ -53,6 +54,8 @@ const objectivesSchema = new Schema({
   usersResponse: {
     type: Boolean,
   },
+
+  action: { type: Schema.Types.ObjectId, ref: "Actions" },
 
   comments: {
     array: [],

@@ -13,16 +13,18 @@ router.post("/edit", isLoggedIn, (req, res) => {
     category,
     visibility,
     sharedWithUser,
+    objectiveId,
   } = req.body;
 
+  console.log(req.body);
+
   Objective.findByIdAndUpdate(
-    req.objectives._id,
+    objectiveId,
     {
       problem,
       objectiveInput,
       keyResult,
       objectiveEndDate,
-      action,
       category,
       visibility,
       sharedWithUser,
@@ -46,13 +48,11 @@ router.post("/add", isLoggedIn, (req, res) => {
   })
     .then((oneProblem) => {
       if (oneProblem) {
-        return res
-          .status(400)
-          .json({
-            errorMessage:
-              "This problem already exists. Create a slightly different one",
-            key: "problem",
-          });
+        return res.status(400).json({
+          errorMessage:
+            "This problem already exists. Create a slightly different one",
+          key: "problem",
+        });
       }
 
       const {

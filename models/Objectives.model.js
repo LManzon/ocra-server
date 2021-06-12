@@ -46,9 +46,7 @@ const objectivesSchema = new Schema({
     default: "Private",
   },
 
-  sharedWithUser: {
-    array: [],
-  },
+  // sharedWithUser: Array,
 
   usersResponse: {
     type: Boolean,
@@ -56,9 +54,7 @@ const objectivesSchema = new Schema({
 
   action: { type: Schema.Types.ObjectId, ref: "Actions" },
 
-  comments: {
-    array: [],
-  },
+  comments: Array,
 });
 
 const Objective = model("Objective", objectivesSchema);

@@ -9,11 +9,12 @@ router.get("/", (req, res, next) => {
 
 
 
-router.use("/auth", authRoutes);
 
+
+
+router.use("/auth", authRoutes);
 router.use("/profile", profileRouter);
 router.use("/objectives", Objectives);
-
 
 
 module.exports = router;

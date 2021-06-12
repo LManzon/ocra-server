@@ -4,20 +4,18 @@ const Objective = require("../models/Objectives.model")
 const router = Router();
 
 
+router.post("/edit", isLoggedIn, (req, res) => {
+  const { problem, objectiveInput, keyResult, objectiveEndDate, action, category, visibility, sharedWithUser } = req.body;
 
-router.post("/edit", (req, res) => {
-  const { problem } = req.body;
-
-    Objective.findByIdAndUpdate(
-      req.objectives._id,
-      { problem },
-      { new: true }
-    ).then((updateObjective) => {
-      res.json({ objective: updateObjective });
-    });
-    
+  Objective.findByIdAndUpdate(
+    req.objectives._id,
+    { problem, objectiveInput, keyResult, objectiveEndDate, action, category, visibility, sharedWithUser },
+    { new: true }
+  ).then((updateObjective) => {
+    res.json({ objective: updateObjective });
   });
 
+});
 
 
 router.get("/", (req, res) => {
@@ -40,7 +38,7 @@ router.post("/add", isLoggedIn, (req, res) => {
       }
 
       const { action, problem, objectiveInput, keyResult, objectiveEndDate, category, visibility, sharedWithUser } =
-      req.body;
+        req.body;
       console.log('visibility:', visibility)
       // console.log('action:', action)
       console.log('category:', category)
@@ -53,11 +51,11 @@ router.post("/add", isLoggedIn, (req, res) => {
         category,
         visibility,
         sharedWithUser,
-       
+
 
       })
         .then((createdObjective) => {
-         // Action.create({
+          // Action.create({
           //   action
           // })
           console.log('createdObjective:', createdObjective)
@@ -74,15 +72,16 @@ router.post("/add", isLoggedIn, (req, res) => {
     });
 });
 
-router.put("/edit", (req,res) => { 
-  const { problem} = req.body;
-  
+router.put("/edit", (req, res) => {
+  const { problem } = req.body;
+
+  /*
   Objective.findByIdAndUpdate(
     req.objective._id,
-    {problem},
-    {new:true}
+    { problem },
+    { new: true }
 
-  )
+  )*/
 })
 
 

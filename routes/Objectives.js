@@ -9,7 +9,7 @@ router.post("/edit", isLoggedIn, (req, res) => {
     objectiveInput,
     keyResult,
     objectiveEndDate,
-    action,
+   
     category,
     visibility,
     sharedWithUser,
@@ -56,7 +56,7 @@ router.post("/add", isLoggedIn, (req, res) => {
       }
 
       const {
-        action,
+        
         problem,
         objectiveInput,
         keyResult,

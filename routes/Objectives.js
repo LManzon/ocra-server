@@ -4,6 +4,7 @@ const Objective = require("../models/Objectives.model");
 const router = Router();
 
 router.post("/edit", isLoggedIn, (req, res) => {
+  console.log(req.user);
   const {
     problem,
     objectiveInput,
@@ -56,7 +57,6 @@ router.post("/add", isLoggedIn, (req, res) => {
       }
 
       const {
-        action,
         problem,
         objectiveInput,
         keyResult,
@@ -77,13 +77,14 @@ router.post("/add", isLoggedIn, (req, res) => {
         category,
         visibility,
         sharedWithUser,
+        user: req.user.id,
       })
         .then((createdObjective) => {
           // Action.create({
           //   action
           // })
           console.log("createdObjective:", createdObjective);
-          res.json({ Objective: "Objective created" });
+          res.json({ Objective: createdObjective });
         })
         .catch((err) => {
           console.log(err.message);

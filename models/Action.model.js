@@ -6,9 +6,10 @@ const actionSchema = new Schema({
     type: String,
     required: true,
   },
-  user: { type: Schema.Types.ObjectId, ref: "User" },
 
-  objective: { type: Schema.Types.ObjectId, ref: "Objective" },
+  // user: { type: Schema.Types.ObjectId, ref: "User" },
+
+  // objective: { type: Schema.Types.ObjectId, ref: "Objective" },
 
   status: {
     type: String,
@@ -16,12 +17,12 @@ const actionSchema = new Schema({
     default: "Not Started",
   },
 
-  actionDate: {
-    type: Date,
-    required: true,
-  },
+  // actionDate: {
+  //   type: Date,
+  //   required: true,
+  // },
 });
 
-const Action = model("User", actionSchema);
+const Action = model("Action", actionSchema);
 
 module.exports = Action;

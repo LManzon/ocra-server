@@ -6,15 +6,14 @@ const router = Router();
 router.post("/edit", isLoggedIn, (req, res) => {
   const {
     problem,
+    category,
     objectiveInput,
     keyResult,
     objectiveEndDate,
-   
-    category,
     visibility,
-    sharedWithUser,
     objectiveId,
   } = req.body;
+
 
   console.log(req.body);
 
@@ -27,13 +26,46 @@ router.post("/edit", isLoggedIn, (req, res) => {
       objectiveEndDate,
       category,
       visibility,
-      sharedWithUser,
     },
     { new: true }
   ).then((updateObjective) => {
     res.json({ objective: updateObjective });
   });
 });
+
+
+router.post("/delete", isLoggedIn, (req, res) => {
+  const {
+    problem,
+    objectiveInput,
+    keyResult,
+    objectiveEndDate,
+    category,
+    visibility,
+    objectiveId,
+  } = req.body;
+
+
+  console.log(req.body);
+
+  Objective.findByIdAndDelete(
+    objectiveId,
+    {
+      problem,
+      objectiveInput,
+      keyResult,
+      objectiveEndDate,
+      category,
+      visibility,
+      sharedWithUser,
+    },
+    { new: true }
+  ).then((deleteObjective) => {
+    res.json({ objective: deleteObjective });
+  });
+});
+
+
 
 router.get("/", (req, res) => {
   Objective.find({}).then((allObjectives) => {
@@ -56,7 +88,7 @@ router.post("/add", isLoggedIn, (req, res) => {
       }
 
       const {
-        
+
         problem,
         objectiveInput,
         keyResult,

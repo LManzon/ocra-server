@@ -22,5 +22,6 @@ router.get("/", (req, res, next) => {
 router.use("/auth", authRoutes);
 router.use("/profile", profileRouter);
 router.use("/objectives", Objectives);
+router.use("/edit", Objectives);
 
 module.exports = router;

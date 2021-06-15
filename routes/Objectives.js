@@ -4,12 +4,14 @@ const Objective = require("../models/Objectives.model");
 const router = Router();
 
 router.post("/edit", isLoggedIn, (req, res) => {
+  console.log(req.body);
   const {
     problem,
     category,
     objectiveInput,
     keyResult,
     objectiveEndDate,
+    category,
     visibility,
     objectiveId,
   } = req.body;
@@ -29,7 +31,8 @@ router.post("/edit", isLoggedIn, (req, res) => {
     },
     { new: true }
   ).then((updateObjective) => {
-    res.json({ objective: updateObjective });
+    console.log("UPDATED OBJECT", updateObjective);
+    res.json({ Objective: updateObjective });
   });
 });
 
@@ -88,14 +91,12 @@ router.post("/add", isLoggedIn, (req, res) => {
       }
 
       const {
-
         problem,
         objectiveInput,
         keyResult,
         objectiveEndDate,
         category,
         visibility,
-        sharedWithUser,
       } = req.body;
       console.log("visibility:", visibility);
       // console.log('action:', action)
@@ -108,14 +109,14 @@ router.post("/add", isLoggedIn, (req, res) => {
         objectiveEndDate,
         category,
         visibility,
-        sharedWithUser,
+        user: req.user.id,
       })
         .then((createdObjective) => {
           // Action.create({
           //   action
           // })
           console.log("createdObjective:", createdObjective);
-          res.json({ Objective: "Objective created" });
+          res.json({ Objective: createdObjective });
         })
         .catch((err) => {
           console.log(err.message);
@@ -126,18 +127,6 @@ router.post("/add", isLoggedIn, (req, res) => {
       console.log(err.message);
       res.status(500).json({ errorMessage: err.message });
     });
-});
-
-router.put("/edit", (req, res) => {
-  const { problem } = req.body;
-
-  /*
-  Objective.findByIdAndUpdate(
-    req.objective._id,
-    { problem },
-    { new: true }
-
-  )*/
 });
 
 module.exports = router;

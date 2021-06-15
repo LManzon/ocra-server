@@ -4,16 +4,14 @@ const Objective = require("../models/Objectives.model");
 const router = Router();
 
 router.post("/edit", isLoggedIn, (req, res) => {
-  console.log(req.user);
+  console.log(req.body);
   const {
     problem,
     objectiveInput,
     keyResult,
     objectiveEndDate,
-    action,
     category,
     visibility,
-    sharedWithUser,
     objectiveId,
   } = req.body;
 
@@ -28,11 +26,11 @@ router.post("/edit", isLoggedIn, (req, res) => {
       objectiveEndDate,
       category,
       visibility,
-      sharedWithUser,
     },
     { new: true }
   ).then((updateObjective) => {
-    res.json({ objective: updateObjective });
+    console.log("UPDATED OBJECT", updateObjective);
+    res.json({ Objective: updateObjective });
   });
 });
 
@@ -63,7 +61,6 @@ router.post("/add", isLoggedIn, (req, res) => {
         objectiveEndDate,
         category,
         visibility,
-        sharedWithUser,
       } = req.body;
       console.log("visibility:", visibility);
       // console.log('action:', action)
@@ -76,7 +73,6 @@ router.post("/add", isLoggedIn, (req, res) => {
         objectiveEndDate,
         category,
         visibility,
-        sharedWithUser,
         user: req.user.id,
       })
         .then((createdObjective) => {
@@ -95,18 +91,6 @@ router.post("/add", isLoggedIn, (req, res) => {
       console.log(err.message);
       res.status(500).json({ errorMessage: err.message });
     });
-});
-
-router.put("/edit", (req, res) => {
-  const { problem } = req.body;
-
-  /*
-  Objective.findByIdAndUpdate(
-    req.objective._id,
-    { problem },
-    { new: true }
-
-  )*/
 });
 
 module.exports = router;

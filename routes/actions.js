@@ -30,6 +30,7 @@ router.post("/edit", isLoggedIn, (req, res) => {
 // });
 
 router.post("/add", isLoggedIn, (req, res) => {
+  console.log("Action:", req.body);
   Action.findOne({
     action: req.body.action,
   })
@@ -50,7 +51,7 @@ router.post("/add", isLoggedIn, (req, res) => {
         action,
       })
         .then((createdAction) => {
-          console.log("createdObjective:", createdAction);
+          console.log("createdAction:", createdAction);
           res.json({ Action: createdAction });
         })
         .catch((err) => {

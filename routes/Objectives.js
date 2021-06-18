@@ -35,10 +35,12 @@ router.post("/edit", isLoggedIn, (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  Objective.find({}).then((allObjectives) => {
-    res.json(allObjectives);
-    console.log(allObjectives);
-  });
+  Objective.find({})
+    .populate("action")
+    .then((allObjectives) => {
+      res.json(allObjectives);
+      console.log(allObjectives);
+    });
 });
 
 router.post("/add", isLoggedIn, (req, res) => {
@@ -60,6 +62,7 @@ router.post("/add", isLoggedIn, (req, res) => {
         keyResult,
         objectiveEndDate,
         category,
+        action,
         visibility,
       } = req.body;
       console.log("visibility:", visibility);
@@ -72,6 +75,7 @@ router.post("/add", isLoggedIn, (req, res) => {
         keyResult,
         objectiveEndDate,
         category,
+        action,
         visibility,
         user: req.user.id,
       })

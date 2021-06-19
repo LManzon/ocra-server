@@ -11,7 +11,6 @@ router.post("/edit", isLoggedIn, (req, res) => {
     objectiveInput,
     keyResult,
     objectiveEndDate,
-    category,
     visibility,
     objectiveId,
   } = req.body;
@@ -60,15 +59,12 @@ router.post("/delete", isLoggedIn, (req, res) => {
       objectiveEndDate,
       category,
       visibility,
-      sharedWithUser,
+      objectiveId,
     },
-    { new: true }
   ).then((deleteObjective) => {
     res.json({ objective: deleteObjective });
   });
 });
-
-
 
 router.get("/", (req, res) => {
   Objective.find({}).then((allObjectives) => {

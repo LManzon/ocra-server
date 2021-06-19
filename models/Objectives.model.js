@@ -52,7 +52,7 @@ const objectivesSchema = new Schema({
     type: Boolean,
   },
 
-  action: { type: Schema.Types.ObjectId, ref: "Actions" },
+  action: { type: Schema.Types.ObjectId, ref: "Action" },
 
   comments: Array,
 });

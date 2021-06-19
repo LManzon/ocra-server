@@ -15,7 +15,6 @@ router.post("/edit", isLoggedIn, (req, res) => {
     objectiveId,
   } = req.body;
 
-
   console.log(req.body);
 
   Objective.findByIdAndUpdate(
@@ -35,33 +34,33 @@ router.post("/edit", isLoggedIn, (req, res) => {
   });
 });
 
-router.post("/delete", isLoggedIn, (req, res) => {
-
-  console.log(req.body);
-
-  Objective.findByIdAndDelete(
-    objectiveId,
-    {
-      problem,
-      objectiveInput,
-      keyResult,
-      objectiveEndDate,
-      category,
-      visibility,
-      objectiveId,
-    },
-  ).then((deleteObjective) => {
-    res.json({ objective: deleteObjective });
-  });
-});
-
-router.get("/", (req, res) => {
-  Objective.find({})
+router.get("/", isLoggedIn, (req, res) => {
+  console.log("user:", req.user);
+  const userId = req.user._id;
+  Objective.find({ user: userId })
     .populate("action")
     .then((allObjectives) => {
       res.json(allObjectives);
       console.log(allObjectives);
     });
+});
+
+router.post("/delete", isLoggedIn, (req, res) => {
+  const objId = req.body.objectiveId;
+
+  // const {
+  //   problem,
+  //   objectiveInput,
+  //   keyResult,
+  //   objectiveEndDate,
+  //   category,
+  //   visibility,
+  //   objectiveId,
+  // } = req.body;
+  console.log("objtoDelete:", objId);
+  Objective.findByIdAndDelete(objId).then((deleteObjective) => {
+    res.json({ objective: deleteObjective });
+  });
 });
 
 router.post("/add", isLoggedIn, (req, res) => {
@@ -105,7 +104,7 @@ router.post("/add", isLoggedIn, (req, res) => {
           //   action
           // })
           console.log("createdObjective:", createdObjective);
-          res.json({ Objective: createdObjective });
+          res.json({ objective: createdObjective });
         })
         .catch((err) => {
           console.log(err.message);

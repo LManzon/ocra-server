@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const authRoutes = require("./auth");
 const profileRouter = require("./profile");
-const Objectives = require("./Objectives");
+const objectives = require("./objectives");
 const actions = require("./actions");
 // const multer = require("multer");
 // const cloudinary = require("cloudinary").v2;
@@ -22,7 +22,7 @@ router.get("/", (req, res, next) => {
 
 router.use("/auth", authRoutes);
 router.use("/profile", profileRouter);
-router.use("/objectives", Objectives);
+router.use("/objectives", objectives);
 router.use("/actions", actions);
 
 module.exports = router;

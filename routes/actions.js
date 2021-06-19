@@ -80,4 +80,14 @@ router.post("/add", isLoggedIn, (req, res) => {
 // });
 // });
 
+router.post("/delete", isLoggedIn, (req, res) => {
+  console.log("delete Action:", req.body);
+  const actionId = req.body.actionId;
+
+  console.log("actionDelete:", actionId);
+  Action.findByIdAndDelete(actionId).then(() => {
+    // res.json({ objective: deleteObjective });
+  });
+});
+
 module.exports = router;

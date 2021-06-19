@@ -34,8 +34,10 @@ router.post("/edit", isLoggedIn, (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
-  Objective.find({})
+router.get("/", isLoggedIn, (req, res) => {
+  console.log("user:", req.user);
+  const userId = req.user._id;
+  Objective.find({ user: userId })
     .populate("action")
     .then((allObjectives) => {
       res.json(allObjectives);
@@ -84,7 +86,7 @@ router.post("/add", isLoggedIn, (req, res) => {
           //   action
           // })
           console.log("createdObjective:", createdObjective);
-          res.json({ Objective: createdObjective });
+          res.json({ objective: createdObjective });
         })
         .catch((err) => {
           console.log(err.message);

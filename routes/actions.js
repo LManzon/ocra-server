@@ -8,7 +8,8 @@ router.post("/edit", isLoggedIn, (req, res) => {
   console.log(req.user);
   const { action, status } = req.body;
 
-  console.log(req.body);
+  console.log("wewe:", req.body);
+  const ActionId = req.body.actionId;
 
   Action.findByIdAndUpdate(
     ActionId,

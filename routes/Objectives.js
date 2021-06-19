@@ -7,10 +7,10 @@ router.post("/edit", isLoggedIn, (req, res) => {
   console.log(req.body);
   const {
     problem,
+    category,
     objectiveInput,
     keyResult,
     objectiveEndDate,
-    category,
     visibility,
     objectiveId,
   } = req.body;
@@ -43,6 +43,24 @@ router.get("/", isLoggedIn, (req, res) => {
       res.json(allObjectives);
       console.log(allObjectives);
     });
+});
+
+router.post("/delete", isLoggedIn, (req, res) => {
+  const objId = req.body.objectiveId;
+
+  // const {
+  //   problem,
+  //   objectiveInput,
+  //   keyResult,
+  //   objectiveEndDate,
+  //   category,
+  //   visibility,
+  //   objectiveId,
+  // } = req.body;
+  console.log("objtoDelete:", objId);
+  Objective.findByIdAndDelete(objId).then((deleteObjective) => {
+    res.json({ objective: deleteObjective });
+  });
 });
 
 router.post("/add", isLoggedIn, (req, res) => {

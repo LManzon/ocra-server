@@ -31,6 +31,7 @@ router.post("/edit", isLoggedIn, (req, res) => {
 
 router.post("/add", isLoggedIn, (req, res) => {
   console.log("Action:", req.body);
+
   Action.findOne({
     action: req.body.action,
   })
@@ -43,17 +44,37 @@ router.post("/add", isLoggedIn, (req, res) => {
         });
       }
 
-      const { action } = req.body;
+      const action = req.body.action;
+      const status = req.body.status;
+      const objectiveId = req.body.objectiveId;
 
       console.log("action:", action);
 
       Action.create({
         action,
+        status,
       })
         .then((createdAction) => {
           console.log("createdAction:", createdAction);
-          res.json({ Action: createdAction });
+          console.log("ObjectiveID:", objectiveId);
+          console.log("ActionId:", createdAction._id);
+          Objective.findByIdAndUpdate(
+            objectiveId,
+            {
+              $push: { action: createdAction._id },
+            },
+            { new: true }
+          )
+            .populate("action")
+            .then((objUpdate) => {
+              console.log("objUpdate:", objUpdate);
+              res.json({ objective: objUpdate });
+            });
         })
+        // .then((newObjective) => {
+        //   res.json({ Action: createdAction });
+        //   console.log("newObjective:", newObjective);
+        // })
         .catch((err) => {
           console.log(err.message);
           res.status(500).json({ errorMessage: err.message });

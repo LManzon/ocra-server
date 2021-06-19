@@ -8,7 +8,7 @@ const objectivesSchema = new Schema({
   category: {
     type: String,
     enum: ["Career", "Passion", "Relationship", "Financial", "Wellbeing"],
-    default: "Passion",
+    // default: "Passion",
     required: true,
   },
 
@@ -52,9 +52,9 @@ const objectivesSchema = new Schema({
     type: Boolean,
   },
 
-  action: { type: Schema.Types.ObjectId, ref: "Action" },
+  action: [{ type: Schema.Types.ObjectId, ref: "Action" }],
 
-  comments: Array,
+  // comments: Array,
 });
 
 const Objective = model("Objective", objectivesSchema);

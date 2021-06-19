@@ -85,8 +85,8 @@ router.post("/delete", isLoggedIn, (req, res) => {
   const actionId = req.body.actionId;
 
   console.log("actionDelete:", actionId);
-  Action.findByIdAndDelete(actionId).then(() => {
-    // res.json({ objective: deleteObjective });
+  Action.findByIdAndDelete(actionId).then((deleteAction) => {
+    res.json({ action: deleteAction });
   });
 });
 

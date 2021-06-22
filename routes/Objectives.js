@@ -41,7 +41,12 @@ router.get("/", isLoggedIn, (req, res) => {
     .populate("action")
     .then((allObjectives) => {
       res.json(allObjectives);
-      console.log(allObjectives);
+      console.log("allObj:", allObjectives);
+      // const date = allObjectives.map((e) => {
+      //   return { ...allObjectives.filter() };
+      // });
+
+      //
     });
 });
 
@@ -76,9 +81,10 @@ router.post("/add", isLoggedIn, (req, res) => {
         action,
         visibility,
       } = req.body;
-      console.log("visibility:", visibility);
+      // console.log("visibility:", visibility);
       // console.log('action:', action)
-      console.log("category:", category);
+      // console.log("category:", category);
+      console.log("date:", objectiveEndDate);
 
       Objective.create({
         problem,

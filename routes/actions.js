@@ -24,7 +24,7 @@ router.post("/edit", isLoggedIn, (req, res) => {
 });
 
 router.post("/add", isLoggedIn, (req, res) => {
-  console.log("Action:", req.body);
+  console.log("ActionCreated:", req.body);
   const objId = req.body.objectiveId;
 
   // Objective.findOne({

@@ -14,7 +14,7 @@ const objectivesSchema = new Schema({
 
   objectiveInput: {
     type: String,
-    required: true,
+    required: false,
   },
 
   objectiveEndDate: {

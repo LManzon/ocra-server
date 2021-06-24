@@ -79,7 +79,7 @@ router.post("/add", isLoggedIn, (req, res) => {
         objectiveEndDate,
         category,
         action,
-        visibility,
+        // visibility,
       } = req.body;
       // console.log("visibility:", visibility);
       // console.log('action:', action)
@@ -93,7 +93,7 @@ router.post("/add", isLoggedIn, (req, res) => {
         objectiveEndDate,
         category,
         action,
-        visibility,
+        // visibility,
         user: req.user.id,
       })
         .then((createdObjective) => {

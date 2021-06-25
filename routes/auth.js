@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-// ℹ️ Handles password encryption
+// ℹ️ Handles password encryptionn
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 

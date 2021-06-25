@@ -19,7 +19,6 @@ const actions = require("./actions");
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
-
 router.use("/auth", authRoutes);
 router.use("/profile", profileRouter);
 router.use("/objectives", objectives);
